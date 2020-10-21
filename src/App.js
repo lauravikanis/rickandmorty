@@ -12,15 +12,19 @@ function App() {
   });
 
   async function getCharacters() {
-    const CharacterOne = await getCharacterById(5);
+    const nCharacter = await getCharacterById(n);
     main.append(
       Character({
-        name: CharacterOne.name,
-        imgSrc: CharacterOne.image,
+        name: nCharacter.name,
+        imgSrc: nCharacter.image,
       })
     );
   }
-  getCharacters();
+  let n = 1;
+  while (n < 10) {
+    getCharacters();
+    n++;
+  }
   const container = createElement("div", { children: [header, main] });
   return container;
 }
