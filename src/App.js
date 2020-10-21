@@ -1,31 +1,42 @@
 import "./app.css";
 import Character from "./components/Character";
+import Characters from "./components/Characters";
 import Header from "./components/Header";
-import { getCharacterById } from "./utils/api";
+
+import { getCharacters } from "./utils/api";
 import { createElement } from "./utils/elements";
 
 function App() {
   const header = Header();
 
+  const characterContainer = Characters();
   const main = createElement("main", {
     className: "main",
+    children: [characterContainer],
   });
 
-  async function getCharacters() {
-    const nCharacter = await getCharacterById(n);
-    main.append(
+  async function loadCharacters(name) {
+    const characters = await getCharacters(name);
+    const characterElements = characters.map((character) =>
       Character({
-        name: nCharacter.name,
-        imgSrc: nCharacter.image,
+        name: character.name,
+        imgSrc: character.image,
       })
     );
+    characterContainer.innerHTML = "";
+    characterContainer.append(...characterElements);
   }
-  let n = 1;
-  while (n < 10) {
-    getCharacters();
-    n++;
-  }
-  const container = createElement("div", { children: [header, main] });
+
+  const searchBar = createElement("input", {
+    className: "search",
+    onchange: (event) => loadCharacters(event.target.value),
+  });
+
+  loadCharacters();
+
+  const container = createElement("div", {
+    children: [header, searchBar, main],
+  });
   return container;
 }
 

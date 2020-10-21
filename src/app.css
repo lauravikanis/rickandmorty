@@ -20,11 +20,18 @@ html {
   color: var(--primary-color);
 }
 body {
+  display: flex;
+  align-items: center;
   margin: 0;
 }
 
 .main {
   padding: 30px 20px;
-  display: flex;
-  flex-wrap: wrap;
+}
+.search {
+  display: block;
+  margin: 0 auto;
+  background-color: #a8d4e8;
+  border-radius: 50px;
+  height: 2.5rem;
 }

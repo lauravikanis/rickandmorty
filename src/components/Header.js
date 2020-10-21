@@ -1,11 +1,11 @@
 import "./header.css";
-import logoSrc from "../assets/logo.png";
+// import logoSrc from "../assets/logo.png";
 import { createElement } from "../utils/elements";
 
 function Header() {
-  const logo = createElement("img", {
-    src: logoSrc,
-    alt: "Logo",
+  const logo = createElement("h1", {
+    innerText: "API-Playground",
+    // alt: "Logo",
   });
 
   const header = createElement("header", {

@@ -2,16 +2,18 @@ import { createElement } from "../utils/elements";
 import "./character.css";
 
 function Character({ name, imgSrc }) {
-  const title = createElement("div", {
-    innertext: name,
+  const title = createElement("p", {
+    className: "character__title",
+    innerText: name,
   });
 
   const avatar = createElement("img", {
+    className: "character__img",
     src: imgSrc,
     alt: name,
   });
 
-  const container = createElement("div", {
+  const container = createElement("article", {
     className: "character",
     children: [title, avatar],
   });
