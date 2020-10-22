@@ -20,8 +20,8 @@ html {
   color: var(--primary-color);
 }
 body {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
   margin: 0;
 }
 
