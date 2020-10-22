@@ -1,6 +1,7 @@
 import "./app.css";
 import Character from "./components/Character";
 import Characters from "./components/Characters";
+import Search from "./components/Search";
 import Header from "./components/Header";
 
 import { getCharacters } from "./utils/api";
@@ -32,7 +33,7 @@ function App() {
         imgSrc: character.image,
       })
     );
-    characterContainer.innerHTML = "";
+    // characterContainer.innerHTML = "";
     characterContainer.append(...characterElements);
 
     nextPage = characters.info.next?.match(/\d+/)[0];
@@ -40,15 +41,17 @@ function App() {
     lastName = name;
   }
 
-  const searchBar = createElement("input", {
-    className: "search",
-    onchange: (event) => loadCharacters(event.target.value),
+  const search = Search({
+    onchange: (value) => {
+      characterContainer.innerHTML = "";
+      loadCharacters(value);
+    },
   });
 
   loadCharacters();
 
   const container = createElement("div", {
-    children: [header, searchBar, main],
+    children: [header, search, main],
   });
   return container;
 }
