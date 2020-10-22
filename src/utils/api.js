@@ -5,13 +5,13 @@
 //   return character;
 // }
 
-export async function getCharacters(name) {
-  let url = `https://rickandmortyapi.com/api/character/`;
+export async function getCharacters(name, page = 1) {
+  let url = `https://rickandmortyapi.com/api/character/?page=${page}`;
   if (name) {
-    url += `?name=${name}`;
+    url += `&name=${name}`;
     // hänge "name" an url an
   }
   const response = await fetch(url);
   const data = await response.json();
-  return data.results;
+  return data;
 }
