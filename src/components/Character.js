@@ -11,6 +11,7 @@ function Character({ name, imgSrc }) {
     className: "character__img",
     src: imgSrc,
     alt: name,
+    loading: "lazy",
   });
 
   const container = createElement("article", {
