@@ -7,17 +7,26 @@ import { getCharacters } from "./utils/api";
 import { createElement } from "./utils/elements";
 
 function App() {
+  let lastName = null;
+  let nextPage = null;
   const header = Header();
 
+  const LoadMoreButton = createElement("button", {
+    className: "button",
+    innerText: "Load More!",
+    onclick: () => {
+      loadCharacters(lastName, nextPage);
+    },
+  });
   const characterContainer = Characters();
   const main = createElement("main", {
     className: "main",
-    children: [characterContainer],
+    children: [characterContainer, LoadMoreButton],
   });
 
-  async function loadCharacters(name) {
-    const characters = await getCharacters(name);
-    const characterElements = characters.map((character) =>
+  async function loadCharacters(name, page) {
+    const characters = await getCharacters(name, page);
+    const characterElements = characters.results.map((character) =>
       Character({
         name: character.name,
         imgSrc: character.image,
@@ -25,6 +34,10 @@ function App() {
     );
     characterContainer.innerHTML = "";
     characterContainer.append(...characterElements);
+
+    nextPage = characters.info.next?.match(/\d+/)[0];
+    LoadMoreButton.disabled = !characters.info.next;
+    lastName = name;
   }
 
   const searchBar = createElement("input", {
